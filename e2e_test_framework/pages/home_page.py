@@ -8,6 +8,7 @@ class HomePage:
     def __init__(self, page: Page):
         """Initialize HomePage with Playwright Page object."""
         self.page = page
+        self.user= page.get_by_role("link", name="mindfullQAafirmations")
         self.tweet_textbox: Locator = page.get_by_test_id("tweetTextarea_0").locator("div").nth(2)
 
     async def get_welcome_message(self) -> str:
