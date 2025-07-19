@@ -9,8 +9,9 @@ class HomePage:
         """Initialize HomePage with Playwright Page object."""
         self.page = page
         self.user= page.get_by_role("link", name="mindfullQAafirmations")
-        self.tweet_textbox: Locator = page.get_by_test_id("tweetTextarea_0").locator("div").nth(2)
-
+        self.tweet_button = page.get_by_test_id("tweetButtonInline")
+        self.tweet_textbox =  page.get_by_test_id("tweetTextarea_0")
+        self.navigate_my_profile = page.get_by_label("mindfullQAafirmations@").get_by_role("link", name="mindfullQAafirmations")
     async def get_welcome_message(self) -> str:
         """Get the welcome message text."""
         return await self.welcome_message.text_content()

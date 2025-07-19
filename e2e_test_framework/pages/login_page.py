@@ -1,7 +1,7 @@
 """
 Page Object for Login Page.
 """
-from playwright.async_api import Page, Locator
+from playwright.async_api import Page, Locator, expect
 
 class LoginPage:
     """Page Object Model for the Login page."""
@@ -23,6 +23,9 @@ class LoginPage:
         await self.next_button.click()
         await self.password.fill(password)
         await self.login_button.click()
+        await self.page.wait_for_load_state("networkidle")
+        await self.page.wait_for_load_state("domcontentloaded")
+        await expect(self.page).to_have_url("https://x.com/home")
 
     async def get_error_message(self) -> str:
         """Get error message text if login fails."""
